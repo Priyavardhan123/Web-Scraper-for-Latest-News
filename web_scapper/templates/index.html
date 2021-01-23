@@ -1,8 +1,218 @@
 {% extends 'base.html' %}
 
-{% block title %}Home 
+{% block styles %}
+<style>
+    #navbar_head{
+        font-size: 1.2rem;
+    }
+    #latest_news{
+        color: #EB7D46;
+    }
+    #latest_news:hover{
+        /* background-color: #EB7D46; */
+        color: #EB7D46;
+    }
+    .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+    }
+    .card{
+        margin-bottom: 1em;
+        padding: 1em;
+    }
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+    #demo{
+        margin-top: 1em;
+        margin-bottom: 3em;
+    }
+    
+    .carousel-caption:hover{
+        background: rgba(0, 0, 0, 0.7);
+        font-size: 1.3rem;
+    }
+    .content {
+            font-size: 0.5rem;
+            position: absolute; /* Position the background text */
+            bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+            background: rgb(0, 0, 0); /* Fallback color */
+            background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+            color: #f1f1f1; /* Grey text */
+            width: 96%; /* Full width */
+            padding: 20px; /* Some padding */
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            
+    }
+    .headline_links:hover{
+        color: #EB7D46;
+    }
+</style>
+{% endblock styles %}
+
+
+{% block title %}Home - NewsHunter
 {% endblock title %}
 
 {% block body %}
-This body block in index.html 
+
+
+<div class="container">
+
+    <!-- Block -->
+    <div class="container">
+        <div class="row mt-4 mb-4" >
+            <div  class="col-8">
+                <img src="static/images/img2.jpg" alt="" width="100%" style="border-radius: 20px">
+                <div class="content">
+                    <h2 class="headline_links">Fire cost Serum Institute over Rs 1,000 crore, says Adar Poonawalla</h2>
+                </div>
+            </div>
+            <div  class="col-4" style="background-color: black; color: white; border-radius: 20px">
+                <h2 class="my-3">Latest news</h2>
+                <div class="row my-3">
+                    <div class="col-8 headline_links">
+                        <p>80% Indians willing to get vaccines, highest in world; Russians most reluctant</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="static/images/img1.png" alt="animal cell" srcset="" width="100%">
+                    </div>
+                </div>
+                <hr color="white">
+                <div class="row my-3">
+                    <div class="col-8 headline_links">
+                        <p>Leicester City Suffer Huge Blow As Striker Jamie Vardy Ruled Out For "Few Weeks"</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="static/images/img3.jpg" alt="animal cell" srcset="" width="100%">
+                    </div>
+                </div>
+                <hr color="white">
+                <div class="row my-3">
+                    <div class="col-8 headline_links">
+                        <p>Barcalona miss two penalties but advances past Cornella in Copa del Rey</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="static/images/img4.jpg" alt="animal cell" srcset="" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- news row 1 -->
+    <div class="row">
+
+        <!-- card 1 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top m-auto" src="static/images/img1.png" style="width:300px;height:180px;" alt="news image">
+                <div class="card-body">
+                    <h4 class="card-title">80% Indians willing to get vaccines, highest in world; Russians most reluctant</h4>
+                    <p class="card-text">Indians are the most willing in the world to get vaccinated as eight in 10 Indians have no hesitancy towards vaccination, a survey by Edelman PR's Trust Barometer 2021 has revealed. The survey was carried out in 28 countries.</p>
+                    <a href="#" class="card-link">Read More</a><br/>
+                    <a href="#" class="card-link">Source : HindustanTimes</a>
+                </div>
+                <div class="card-footer text-muted">
+                    2 min ago
+                </div>
+            </div>
+        </div>
+
+        <!-- card 2 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top m-auto" src="static/images/img2.jpg" alt="news image" style="width:300px;height:180px;">
+                <div class="card-body">
+                    <h4 class="card-title">Fire cost Serum Institute over Rs 1,000 crore, says Adar Poonawalla</h4>
+                    <p class="card-text">Thursday’s fire cost Serum Institute over Rs 1,000 crore. The company CEO Adar Poonawalla said that bulk area and production filling line have suffered the most damage, affecting future manufacturing of several vaccines.</p>
+                    <a href="#" class="card-link">Read More</a><br/>
+                    <a href="#" class="card-link">Source : IndiaToday</a>
+                </div>
+                <div class="card-footer text-muted">
+                    10 min ago
+                </div>
+            </div>
+        </div>
+
+        <!-- card 3 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top m-auto" src="static/images/img3.jpg" style="width:300px;height:180px;" alt="news image">
+                <div class="card-body">
+                    <h4 class="card-title">Leicester City Suffer Huge Blow As Striker Jamie Vardy Ruled Out For "Few Weeks"</h4>
+                    <p class="card-text">Leicester's Premier League title hopes suffered a blow on Friday as manager Brendan Rodgers said talismanic striker Jamie Vardy will be out "for a few weeks" to have a hernia operation.</p>
+                    <a href="#" class="card-link">Read More</a><br/>
+                    <a href="#" class="card-link">Source : NDTV</a>
+                </div>
+                <div class="card-footer text-muted">
+                    4 min ago
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <div class="row">
+        <div class="col-md">
+            <div class="card">
+                <div class="card-horizontal">
+                    <div class="img-square-wrapper">
+                        <img class="new_img" src="static/images/img1.png" style="width:300px;height:180px;" alt="news image">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">80% Indians willing to get vaccines, highest in world; Russians most reluctant</h4>
+                        <p class="card-text">Indians are the most willing in the world to get vaccinated as eight in 10 Indians have no hesitancy towards vaccination, a survey by Edelman PR's Trust Barometer 2021 has revealed. The survey was carried out in 28 countries.</p>
+                        <a href="#" class="card-link">Read More</a>
+                        <a href="#" class="card-link">Source : HindustanTimes</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+        
+    </div> -->
+    <!-- <div class="row">
+        <div class="col-md">
+                <div class="card">
+                    <div class="card-horizontal">
+                        <div class="img-square-wrapper">
+                            <img class="new_img" src="static/images/img2.jpg" alt="news image" style="width:300px;height:180px;">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Fire cost Serum Institute over Rs 1,000 crore, says Adar Poonawalla</h4>
+                            <p class="card-text">Thursday’s fire cost Serum Institute over Rs 1,000 crore. The company CEO Adar Poonawalla said that bulk area and production filling line have suffered the most damage, affecting future manufacturing of several vaccines.</p>
+                            <a href="#" class="card-link">Read More</a>
+                            <a href="#" class="card-link">Source : IndiaToday</a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 10 mins ago</small>
+                    </div>
+                </div>
+        </div>
+    </div> -->
+</div>
+
+
+
+
+
+
+
+<!--<div class="container">
+    <div class="row">
+
+        <div class="col-md-7">
+
+        </div>
+
+        <div class="col-md-5">
+
+        </div>
+    </div>
+</div>-->
 {% endblock body %}
