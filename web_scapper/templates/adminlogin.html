@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Raleway:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="static/images/logo.png" type="image/png" sizes="15x10">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <title>AdminLogin - NewsHunter</title>
+
+    <!-- External Style Sheet -->
+    <link rel="stylesheet" href="static/css/adminlogin.css">
+
+  </head>
+  <body class="login-body">
+    <div class="container login-cont">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="container box">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <img class="navbar-brand logo" src="static/images/logo.png"/>
+                            <h3 class="head">Admin Login</h3>
+                        </nav>
+                    </div>
+                    <div class="row">
+                        <form class=" forms" method="POST" action= "/login">
+                          {% csrf_token%}
+                          {% if error %}
+                            <div class="text-danger">{{ error }}</div>
+                          {% endif %}
+                            <div class="form-group">
+                              <label class="labels">Email ID</label>
+                              <input type="email" class="form-control contr" name="useremail" aria-describedby="emailHelp" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                              <label class="labels">Password</label>
+                              <input type="password" class="form-control contr" name="password" placeholder="Enter your Password" required>
+                            </div>
+                            <br/><br/>
+                            <button type="submit" class="btn btn-outline-primary login-btn">Log in</button>
+                        </form>
+                    </div>
+
+
+                    <!-- <h1 class="aboutus-brand">Poll Maker</h1>
+                    <p class="lead">The website will allow users to login and create polls with one question and multiple choices. These polls will be seen by the other logged in users and they can vote for it if they wish to. The results will be declared after a deadline for each poll. Every user can see the results.
+                        A user can also search for a poll with a keyword.
+                        </p>
+                    <p class="aboutus-footer1">
+                        <a class="btn btn-md" id="aboutus-btn" href="#" role="button">Get Started</a>
+                    </p>
+                    <hr class="my-4">
+                    <p class="lead aboutus-footer2">Poll Maker Copyright 2020 All rights reserved</p>
+                  </div> -->
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+  </body>
+</html>
