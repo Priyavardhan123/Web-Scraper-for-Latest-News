@@ -1,0 +1,3 @@
+The below link contains the dataset as well as glove6B.100d.txt.
+
+https://drive.google.com/drive/folders/13jBZiUX2lCNNrWl05ivrhQRahIOgAhXM?usp=sharing
