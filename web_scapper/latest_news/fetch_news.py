@@ -138,9 +138,9 @@ for i in range(4):
         news.append(news_format)
 
 # create json file of the news
-news_file = open('latest_news/news.json','w+')
-print(json.dumps(news, indent=4), file=news_file)
-news_file.close()
+# news_file = open('latest_news/news.json','w+')
+# print(json.dumps(news, indent=4), file=news_file)
+# news_file.close()
 
 # insert data in database
 try: 
