@@ -1,6 +1,6 @@
 import pymongo
 
-db_name = "web-scraper"
+db_name = "web_scraper"
 port = 27017
 host = "localhost"
 username = ""

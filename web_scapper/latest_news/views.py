@@ -2,9 +2,11 @@ from django.shortcuts import render, HttpResponse
 from django.template.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from web_scapper.utils import get_MongoClient
+import os
 
 # Create your views here.
 def index(request):
+    os.system('python3 latest_news/fetch_news.py')
     return render(request, 'index.html') 
     
 def international(request):
