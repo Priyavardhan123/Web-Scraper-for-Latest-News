@@ -3,11 +3,22 @@ from django.template.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from web_scapper.utils import get_MongoClient
 import os
+import pymongo
 
 # Create your views here.
 def index(request):
     os.system('python3 latest_news/fetch_news.py')
-    return render(request, 'index.html') 
+
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["web_scraper"]
+    mycol = mydb["news_table"]
+
+    news = mycol.find()
+    news_list = []
+    for i in news:
+        news_list.append(i)
+    print(len(news_list))
+    return render(request, 'index.html', {'news_list' : news_list}) 
     
 def international(request):
     return render(request, 'international.html') 

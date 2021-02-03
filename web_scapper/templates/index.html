@@ -48,6 +48,7 @@
     }
     .headline_links:hover{
         color: #EB7D46;
+        text-decoration: none;
     }
 </style>
 {% endblock styles %}
@@ -58,6 +59,12 @@
 
 {% block body %}
 
+<!-- {% for news in news_list %}
+Headline : <a href="{{news.Article_link}}"">{{news.Headline}}</a><br>
+Image : <img src="{{news.Img_src}}" alt="image" srcset="" width="100px"> <br>
+Description : {{news.Content}}<br>
+<br>
+{% endfor %} -->
 
 <div class="container">
 
@@ -65,13 +72,18 @@
     <div class="container">
         <div class="row mt-4 mb-4" >
             <div  class="col-8">
-                <img src="static/images/img2.jpg" alt="" width="100%" style="border-radius: 20px">
-                <div class="content">
-                    <h2 class="headline_links">Fire cost Serum Institute over Rs 1,000 crore, says Adar Poonawalla</h2>
-                </div>
+                {% for news in news_list %}
+                    {% if forloop.last %}
+                        <img src="{{news.Img_src}}" alt="" width="100%" height="100%" style="border-radius: 20px">
+                        <div class="content">
+                            <a style="color: white;" class="headline_links" href="{{news.Article_link}}"><h2 class="headline_links">{{news.Headline}}</h2></a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div  class="col-4" style="background-color: black; color: white; border-radius: 20px">
                 <h2 class="my-3">Latest news</h2>
+
                 <div class="row my-3">
                     <div class="col-8 headline_links">
                         <p>80% Indians willing to get vaccines, highest in world; Russians most reluctant</p>

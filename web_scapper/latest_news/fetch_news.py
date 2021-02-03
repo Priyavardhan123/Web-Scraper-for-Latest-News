@@ -57,7 +57,8 @@ i=0
 for img in imgs:
     for tag in img:
         if tag.get('data-src') is not None:
-            news[i]['Img_src'] = tag.get('data-src')
+            news[i]['Img_src'] = str(tag.get('data-src')).replace("width-150","width-900")
+            news[i]['Img_src'] = news[i]['Img_src'].replace("width-141","width-900")
             i+=1
 
 
@@ -80,7 +81,7 @@ for i in more:
             
         news_format = {
             # "Id" : str(id),
-            "Img_src" : tmp1[j].get('data-proxy-image'),
+            "Img_src" : str(tmp1[j].get('data-proxy-image')).replace("LANDSCAPE_215", "FREE_660"),
             "Headline" : tmp2[j].text.strip(),
             "Article_link" : tmp2[j].get('href'),
             "Category" : "",
@@ -104,7 +105,7 @@ for i in thehindu_news:
 
         news_format = {
             # "Id" : str(id),
-            "Img_src" : tmp1[j].get('data-src-template'),
+            "Img_src" : str(tmp1[j].get('data-src-template')).replace("BINARY/thumbnail", "ALTERNATES/FREE_660"),
             "Headline" : tmp2[j].text.strip(),
             "Article_link" : tmp2[j].find("a").get('href'),
             "Category" : "",
@@ -126,7 +127,7 @@ for i in range(4):
 
         news_format = {
             # "Id" : str(id),
-            "Img_src" : str(y[j].get('data-src')).replace("{width}","300"),
+            "Img_src" : str(y[j].get('data-src')).replace("{width}","900"),
             "Headline" : x[j].text.strip(),
             "Article_link" : url4 + z[j].get('href'),
             "Category" : "",
