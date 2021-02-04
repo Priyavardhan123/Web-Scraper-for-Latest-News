@@ -74,9 +74,8 @@ for i in more:
 
     for j in range(len(tmp1)):
         content = tmp1[j].get('alt')
-        if (content=="Representational image"):
-            content = ""
-        if (content=="For representational purpose only."):
+        tmp3 = content.split()
+        if len(tmp3)<10:
             content = ""
             
         news_format = {
@@ -98,9 +97,8 @@ for i in thehindu_news:
 
     for j in range(len(tmp2)):
         content = tmp1[j].get('alt')
-        if (content=="Representational image"):
-            content = ""
-        if (content=="For representational purpose only."):
+        tmp3 = content.split()
+        if len(tmp3)<10:
             content = ""
 
         news_format = {
@@ -124,12 +122,17 @@ for i in range(4):
     z = bbc_news[i].find_all("a", class_="media__link")
 
     for j in range(len(x)):
-
+        link=""
+        if z[j].get('href')[0:5] == "https":
+            link = "{0}".format( z[j].get('href'))  
+        else:
+            link = url4 + z[j].get('href')
+            
         news_format = {
             # "Id" : str(id),
             "Img_src" : str(y[j].get('data-src')).replace("{width}","900"),
             "Headline" : x[j].text.strip(),
-            "Article_link" : url4 + z[j].get('href'),
+            "Article_link" : link,
             "Category" : "",
             "Content" :  w[j].text.strip(),
             "Source" : "BBC News",

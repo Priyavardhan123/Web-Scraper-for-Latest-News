@@ -17,8 +17,18 @@ def index(request):
     news_list = []
     for i in news:
         news_list.append(i)
-    print(len(news_list))
-    return render(request, 'index.html', {'news_list' : news_list}) 
+    
+    last_five = []
+    for i in range(5):
+        last_five.append(news_list.pop())
+    
+    last_eight = []
+    for i in range(8):
+        last_eight.append(news_list.pop())
+    
+    # print(last_five)
+        
+    return render(request, 'index.html', {'news_list' : news_list , 'last_five' : last_five, 'last_eight' : last_eight}) 
     
 def international(request):
     return render(request, 'international.html') 
