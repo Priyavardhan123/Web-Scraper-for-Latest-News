@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from web_scapper.utils import get_MongoClient
 import os
 import pymongo
+from datetime import datetime
 
 # Create your views here.
 def index(request):
@@ -16,7 +17,15 @@ def index(request):
     news = mycol.find()
     news_list = []
     for i in news:
+        time = i['DateTime']
+        current_time = datetime.now()
+        duration = (current_time - time).total_seconds()
+        i['DateTime'] = int(duration//60)
         news_list.append(i)
+
+        # Delete news with duration more than 24 hrs(86400 seconds) 
+        if duration>86400:              
+            mycol.delete_one({'Headline' : i['Headline']})
     
     last_five = []
     for i in range(5):
@@ -25,9 +34,7 @@ def index(request):
     last_eight = []
     for i in range(8):
         last_eight.append(news_list.pop())
-    
-    # print(last_five)
-        
+            
     return render(request, 'index.html', {'news_list' : news_list , 'last_five' : last_five, 'last_eight' : last_eight}) 
     
 def international(request):

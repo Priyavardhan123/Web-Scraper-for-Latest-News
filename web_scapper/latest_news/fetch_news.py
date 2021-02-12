@@ -31,6 +31,7 @@ bbc_news = soup4.find_all("ul", class_="media-list--fixed-height")
 id = 1
 
 # fetch from Times of India
+print("Fetching news from Times Of India...")
 for line in headlines:
     link = ""
     for anchor in line:
@@ -47,7 +48,7 @@ for line in headlines:
         "Category" : "",
         "Content" : "",
         "Source" : "Times Of India",
-        "DateTime" : (datetime.now()).strftime("%H:%M")
+        "DateTime" : datetime.now()
     }
     id+=1
     news.append(news_format)
@@ -68,6 +69,7 @@ for desc in descriptions:
     i+=1
 
 # fetch from The Hindu
+print("Fetching news from The Hindu...")
 for i in more:
     tmp1 = i.find_all("img")
     tmp2 = i.find_all("a") 
@@ -86,7 +88,7 @@ for i in more:
             "Category" : "",
             "Content" :  content,
             "Source" : "The Hindu",
-            "DateTime" : (datetime.now()).strftime("%H:%M")
+            "DateTime" : datetime.now()
         }
         id+=1
         news.append(news_format)
@@ -109,12 +111,13 @@ for i in thehindu_news:
             "Category" : "",
             "Content" :  content,
             "Source" : "The Hindu",
-            "DateTime" : (datetime.now()).strftime("%H:%M")
+            "DateTime" : datetime.now()
         }
         id+=1
         news.append(news_format)
 
 # fetch from bbc news
+print("Fetching news from BBC news...")
 for i in range(4):
     w = bbc_news[i].find_all("p", class_="media__summary")
     x = bbc_news[i].find_all("h3", class_="media__title")
@@ -136,7 +139,7 @@ for i in range(4):
             "Category" : "",
             "Content" :  w[j].text.strip(),
             "Source" : "BBC News",
-            "DateTime" : (datetime.now()).strftime("%H:%M")
+            "DateTime" : datetime.now()
         }
         id+=1
         news.append(news_format)
@@ -147,6 +150,7 @@ for i in range(4):
 # news_file.close()
 
 # insert data in database
+
 try: 
 	conn = MongoClient() 
 	print("Connected successfully!!!") 
@@ -161,6 +165,7 @@ db = conn.web_scraper
 
 collection = db.news_table 
 
+print("Insert data in mongoDB")
 for i in news:
     x = collection.find_one({'Headline' : i['Headline']})
     if x is None:
