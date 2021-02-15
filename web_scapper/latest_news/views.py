@@ -23,8 +23,8 @@ def index(request):
         i['DateTime'] = int(duration//60)
         news_list.append(i)
 
-        # Delete news with duration more than 24 hrs(86400 seconds) 
-        if duration>86400:              
+        # Delete news with duration more than 36 hrs(129600 seconds) 
+        if duration>129600:              
             mycol.delete_one({'Headline' : i['Headline']})
     
     last_five = []
@@ -37,20 +37,144 @@ def index(request):
             
     return render(request, 'index.html', {'news_list' : news_list , 'last_five' : last_five, 'last_eight' : last_eight}) 
     
-def international(request):
-    return render(request, 'international.html') 
+def business(request):
+    # os.system('python3 latest_news/fetch_news.py')
 
-def national(request):
-    return render(request, 'national.html') 
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["web_scraper"]
+    mycol = mydb["news_table"]
+
+    news = mycol.find({'Category' : 'Business'})
+    news_list = []
+    for i in news:
+        time = i['DateTime']
+        current_time = datetime.now()
+        duration = (current_time - time).total_seconds()
+        i['DateTime'] = int(duration//60)
+        news_list.append(i)
+
+        # Delete news with duration more than 36 hrs(129600 seconds) 
+        if duration>129600:              
+            mycol.delete_one({'Headline' : i['Headline']})
+    
+    last_three = []
+    for i in range(3):
+        last_three.append(news_list.pop())
+
+    last_six = []
+    if len(news_list)>6:
+        for i in range(6):
+            last_six.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_six.append(news_list.pop())
+    
+    return render(request, 'business.html',{'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
+
+def tech(request):
+    # os.system('python3 latest_news/fetch_news.py')
+
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["web_scraper"]
+    mycol = mydb["news_table"]
+
+    news = mycol.find({'Category' : 'Tech'})
+    news_list = []
+    for i in news:
+        time = i['DateTime']
+        current_time = datetime.now()
+        duration = (current_time - time).total_seconds()
+        i['DateTime'] = int(duration//60)
+        news_list.append(i)
+
+        # Delete news with duration more than 36 hrs(129600 seconds) 
+        if duration>129600:              
+            mycol.delete_one({'Headline' : i['Headline']})
+    
+    last_three = []
+    for i in range(3):
+        last_three.append(news_list.pop())
+
+    last_six = []
+    if len(news_list)>6:
+        for i in range(6):
+            last_six.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_six.append(news_list.pop())
+    
+    return render(request, 'tech.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
 
 def sports(request):
-    return render(request, 'sports.html') 
+    # os.system('python3 latest_news/fetch_news.py')
+
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["web_scraper"]
+    mycol = mydb["news_table"]
+
+    news = mycol.find({'Category' : 'Sports'})
+    news_list = []
+    for i in news:
+        time = i['DateTime']
+        current_time = datetime.now()
+        duration = (current_time - time).total_seconds()
+        i['DateTime'] = int(duration//60)
+        news_list.append(i)
+
+        # Delete news with duration more than 36 hrs(129600 seconds) 
+        if duration>129600:              
+            mycol.delete_one({'Headline' : i['Headline']})
+    
+    last_three = []
+    for i in range(3):
+        last_three.append(news_list.pop())
+
+    last_six = []
+    if len(news_list)>6:
+        for i in range(6):
+            last_six.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_six.append(news_list.pop())
+    
+    return render(request, 'sports.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
 
 def finance(request):
     return render(request, 'finance.html') 
 
 def entertainment(request):
-    return render(request, 'entertainment.html')
+    # os.system('python3 latest_news/fetch_news.py')
+
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["web_scraper"]
+    mycol = mydb["news_table"]
+
+    news = mycol.find({'Category' : 'Entertainment'})
+    news_list = []
+    for i in news:
+        time = i['DateTime']
+        current_time = datetime.now()
+        duration = (current_time - time).total_seconds()
+        i['DateTime'] = int(duration//60)
+        news_list.append(i)
+
+        # Delete news with duration more than 36 hrs(129600 seconds) 
+        if duration>129600:              
+            mycol.delete_one({'Headline' : i['Headline']})
+    
+    last_three = []
+    for i in range(3):
+        last_three.append(news_list.pop())
+
+    last_six = []
+    if len(news_list)>6:
+        for i in range(6):
+            last_six.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_six.append(news_list.pop())
+    
+    return render(request, 'entertainment.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
 
 def adminlogin(request):
     if not request.session.get('useremail', None):
