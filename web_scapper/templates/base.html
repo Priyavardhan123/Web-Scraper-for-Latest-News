@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Favicon -->
     <link rel="icon" href="static/images/logo.png" type="image/png" sizes="15x10">
     
@@ -43,7 +43,7 @@
               <a class="nav-link" id="entertainment_news" href="/entertainment">Entertainment</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="polictics_news" href="/polictics">Polictics</a>
+              <a class="nav-link" id="politics_news" href="/politics">Politics</a>
             </li>
           </ul>
           
@@ -51,8 +51,10 @@
             <form class="form-inline my-2 mx-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search News" aria-label="Search">
             </form>
-            <li class="nav-item nav-link" id="">
-              Weather report
+            <li class="nav-item nav-link active" style="font-size: 15px; margin-top: -5%; margin-bottom: -5%">
+              <i style="font-size:20px" class="fa">&#xf041;</i> {{weather_report.city}} <br>
+              Feels Like {{weather_report.temp}} &#8451<br>
+              With {{weather_report.weather}} <img src="http://openweathermap.org/img/w/{{weather_report.icon}}.png" style="margin-top: -10%" alt="weather_img">
             </li>
           </ul>
         </div>

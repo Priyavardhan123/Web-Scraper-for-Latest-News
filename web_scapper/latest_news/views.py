@@ -5,8 +5,30 @@ from web_scapper.utils import get_MongoClient
 import os
 import pymongo
 from datetime import datetime
+import requests
+from bs4 import BeautifulSoup
 
 # Create your views here.
+
+def get_weather():
+    page1 = requests.get('https://www.google.com/search?lr=lang_en&ie=UTF-8&q=weather')
+    soup1 = BeautifulSoup(page1.content, 'lxml')
+    h = soup1.find("span", class_='BNeawe tAd8D AP7Wnd')
+    city = str(h.text).split(",")[0]
+
+    response = requests.get('http://api.openweathermap.org/data/2.5/weather?q='+city+'&APPID=46c58e3eded12aaeb86c8287b19e4de5')
+    weather_report = {}
+    if response.status_code == 200:
+        data = response.json()
+        main = data['main']
+        weather_report['city'] = city
+        weather_report['temp'] = int(main['feels_like'] - 273.15)
+        weather_report['humidity'] = main['humidity']
+        weather_report['weather'] = data['weather'][0]['description']
+        weather_report['icon'] = data['weather'][0]['icon']
+    
+    return weather_report
+
 def index(request):
     os.system('python3 latest_news/fetch_news.py')
 
@@ -34,8 +56,10 @@ def index(request):
     last_eight = []
     for i in range(8):
         last_eight.append(news_list.pop())
+
+    weather_report = get_weather()
             
-    return render(request, 'index.html', {'news_list' : news_list , 'last_five' : last_five, 'last_eight' : last_eight}) 
+    return render(request, 'index.html', {'news_list' : news_list , 'last_five' : last_five, 'last_eight' : last_eight, 'weather_report' : weather_report}) 
     
 def business(request):
     # os.system('python3 latest_news/fetch_news.py')
@@ -69,7 +93,9 @@ def business(request):
         for i in range(len(news_list)):
             last_six.append(news_list.pop())
     
-    return render(request, 'business.html',{'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
+    weather_report = get_weather()
+
+    return render(request, 'business.html',{'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six, 'weather_report' : weather_report}) 
 
 def tech(request):
     # os.system('python3 latest_news/fetch_news.py')
@@ -102,8 +128,10 @@ def tech(request):
     else:
         for i in range(len(news_list)):
             last_six.append(news_list.pop())
-    
-    return render(request, 'tech.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
+        
+    weather_report = get_weather()
+
+    return render(request, 'tech.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six, 'weather_report' : weather_report}) 
 
 def sports(request):
     # os.system('python3 latest_news/fetch_news.py')
@@ -137,7 +165,9 @@ def sports(request):
         for i in range(len(news_list)):
             last_six.append(news_list.pop())
     
-    return render(request, 'sports.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
+    weather_report = get_weather()
+
+    return render(request, 'sports.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six, 'weather_report' : weather_report}) 
 
 def entertainment(request):
     # os.system('python3 latest_news/fetch_news.py')
@@ -171,7 +201,9 @@ def entertainment(request):
         for i in range(len(news_list)):
             last_six.append(news_list.pop())
     
-    return render(request, 'entertainment.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
+    weather_report = get_weather()
+
+    return render(request, 'entertainment.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six, 'weather_report' : weather_report}) 
 
 def politics(request):
     # os.system('python3 latest_news/fetch_news.py')
@@ -205,7 +237,9 @@ def politics(request):
         for i in range(len(news_list)):
             last_six.append(news_list.pop())
     
-    return render(request, 'politics.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six}) 
+    weather_report = get_weather()
+
+    return render(request, 'politics.html', {'news_list' : news_list , 'last_three' : last_three, 'last_six': last_six, 'weather_report' : weather_report}) 
 
 def adminlogin(request):
     if not request.session.get('useremail', None):
