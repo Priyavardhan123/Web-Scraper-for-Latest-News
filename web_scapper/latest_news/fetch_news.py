@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 from pymongo import MongoClient 
+from views import category
 
 url1 = 'https://timesofindia.indiatimes.com/news'
 url2 = 'https://www.thehindu.com/news/'
@@ -13,6 +14,7 @@ page1 = requests.get(url1)
 page2 = requests.get(url2)
 page3 = requests.get(url3)
 page4 = requests.get(url4)
+
 
 news = []
 
@@ -27,6 +29,15 @@ descriptions = soup1.find_all("span", class_="w_desc")
 more = soup2.find_all("div", class_="story4-sub-cont")
 thehindu_news = soup3.find_all("div", class_="story-card")
 bbc_news = soup4.find_all("ul", class_="media-list--fixed-height")
+
+# print(type(headlines))
+
+headline1 = []
+headline2 = []
+headline3 = []
+headline4 = []
+
+
         
 id = 1
 
@@ -39,6 +50,8 @@ for line in headlines:
             link = "{0}".format( anchor.get('href'))  
         else:
             link = "https://timesofindia.indiatimes.com{0}".format( anchor.get('href'))
+
+    headline1.append(line.text)
 
     news_format = {
         # "Id" : str(id),
@@ -54,6 +67,7 @@ for line in headlines:
     id+=1
     news.append(news_format)
 
+category(headline1)
 
 i=0
 for img in imgs:
@@ -80,7 +94,9 @@ for i in more:
         tmp3 = content.split()
         if len(tmp3)<10:
             content = ""
-            
+
+        headline2.append(tmp2[j].text)
+
         news_format = {
             # "Id" : str(id),
             "Img_src" : str(tmp1[j].get('data-proxy-image')).replace("LANDSCAPE_215", "FREE_660"),
@@ -95,6 +111,8 @@ for i in more:
         id+=1
         news.append(news_format)
 
+category(headline2)
+
 for i in thehindu_news:
     tmp1 = i.find_all("img")
     tmp2 = i.find_all("h2")
@@ -104,6 +122,8 @@ for i in thehindu_news:
         tmp3 = content.split()
         if len(tmp3)<10:
             content = ""
+
+        headline3.append(tmp2[j].text)
 
         news_format = {
             # "Id" : str(id),
@@ -119,6 +139,8 @@ for i in thehindu_news:
         id+=1
         news.append(news_format)
 
+category(headline3)
+
 # fetch from bbc news
 # print("Fetching news from BBC news...")
 for i in range(4):
@@ -133,7 +155,9 @@ for i in range(4):
             link = "{0}".format( z[j].get('href'))  
         else:
             link = url4 + z[j].get('href')
-            
+
+        headline4.append(x[j].text)
+
         news_format = {
             # "Id" : str(id),
             "Img_src" : str(y[j].get('data-src')).replace("{width}","900"),
@@ -147,6 +171,8 @@ for i in range(4):
         }
         id+=1
         news.append(news_format)
+
+category(headline4)
 
 # create json file of the news
 # news_file = open('latest_news/news.json','w+')
@@ -174,3 +200,4 @@ for i in news:
     x = collection.find_one({'Headline' : i['Headline']})
     if x is None:
         collection.insert_one( i )
+
