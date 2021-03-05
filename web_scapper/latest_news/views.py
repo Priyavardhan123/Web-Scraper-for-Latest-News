@@ -91,7 +91,7 @@ def business(request):
     mydb = myclient["web_scraper"]
     mycol = mydb["news_table"]
 
-    news = mycol.find({'Category' : 'Business'})
+    news = mycol.find({'Category' : 'business'})
     news_list = []
     for i in news:
         time = i['DateTime']
@@ -105,8 +105,12 @@ def business(request):
             mycol.delete_one({'Headline' : i['Headline']})
     
     last_three = []
-    for i in range(3):
-        last_three.append(news_list.pop())
+    if len(news_list)>3:
+        for i in range(3):
+            last_three.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_three.append(news_list.pop())
 
     last_six = []
     if len(news_list)>6:
@@ -127,7 +131,7 @@ def tech(request):
     mydb = myclient["web_scraper"]
     mycol = mydb["news_table"]
 
-    news = mycol.find({'Category' : 'Tech'})
+    news = mycol.find({'Category' : 'tech'})
     news_list = []
     for i in news:
         time = i['DateTime']
@@ -141,8 +145,12 @@ def tech(request):
             mycol.delete_one({'Headline' : i['Headline']})
     
     last_three = []
-    for i in range(3):
-        last_three.append(news_list.pop())
+    if len(news_list)>3:
+        for i in range(3):
+            last_three.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_three.append(news_list.pop())
 
     last_six = []
     if len(news_list)>6:
@@ -163,7 +171,7 @@ def sports(request):
     mydb = myclient["web_scraper"]
     mycol = mydb["news_table"]
 
-    news = mycol.find({'Category' : 'Sports'})
+    news = mycol.find({'Category' : 'sport'})
     news_list = []
     for i in news:
         time = i['DateTime']
@@ -177,8 +185,12 @@ def sports(request):
             mycol.delete_one({'Headline' : i['Headline']})
     
     last_three = []
-    for i in range(3):
-        last_three.append(news_list.pop())
+    if len(news_list)>3:
+        for i in range(3):
+            last_three.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_three.append(news_list.pop())
 
     last_six = []
     if len(news_list)>6:
@@ -199,7 +211,7 @@ def entertainment(request):
     mydb = myclient["web_scraper"]
     mycol = mydb["news_table"]
 
-    news = mycol.find({'Category' : 'Entertainment'})
+    news = mycol.find({'Category' : 'entertainment'})
     news_list = []
     for i in news:
         time = i['DateTime']
@@ -213,8 +225,12 @@ def entertainment(request):
             mycol.delete_one({'Headline' : i['Headline']})
     
     last_three = []
-    for i in range(3):
-        last_three.append(news_list.pop())
+    if len(news_list)>3:
+        for i in range(3):
+            last_three.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_three.append(news_list.pop())
 
     last_six = []
     if len(news_list)>6:
@@ -249,8 +265,12 @@ def politics(request):
             mycol.delete_one({'Headline' : i['Headline']})
     
     last_three = []
-    for i in range(3):
-        last_three.append(news_list.pop())
+    if len(news_list)>3:
+        for i in range(3):
+            last_three.append(news_list.pop())
+    else:
+        for i in range(len(news_list)):
+            last_three.append(news_list.pop())
 
     last_six = []
     if len(news_list)>6:
@@ -306,7 +326,7 @@ def reported(request):
         return render(request, 'reported.html') 
 
 def category(texts):
-    df = pd.read_csv("BBC News Train.csv")
+    df = pd.read_csv("latest_news/BBC News Train.csv")
     df['category_id'] = df['Category'].factorize()[0]
     unique_category_df = df[['Category','category_id']].drop_duplicates().sort_values('category_id')
     category_to_id = dict(unique_category_df.values)
@@ -354,7 +374,7 @@ def category(texts):
 
     model.fit(features, labels)
 
-    test_df = pd.read_csv("BBC News Test.csv")
+    test_df = pd.read_csv("latest_news/BBC News Test.csv")
 
     test_features = tfidf.transform(test_df.Text.tolist())
 
@@ -362,9 +382,11 @@ def category(texts):
 
     text_features = tfidf.transform(texts)
     predictions = model.predict(text_features)
+    prediction_list = []
     for text, predicted in zip(texts, predictions):
-        print('"{}"'.format(text))
-        print("  - Predicted as: '{}'".format(id_to_category[predicted]))
-        print("")
+        # print('"{}"'.format(text))
+        # print("  - Predicted as: '{}'".format(id_to_category[predicted]))
+        # print("")
+        prediction_list.append((id_to_category[predicted]))
 
-    
+    return prediction_list
