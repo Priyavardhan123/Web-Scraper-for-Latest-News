@@ -251,7 +251,7 @@ def politics(request):
     mydb = myclient["web_scraper"]
     mycol = mydb["news_table"]
 
-    news = mycol.find({'Category' : 'Politics'})
+    news = mycol.find({'Category' : 'politics'})
     news_list = []
     for i in news:
         time = i['DateTime']
