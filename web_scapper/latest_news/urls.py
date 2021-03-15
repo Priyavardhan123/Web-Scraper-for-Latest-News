@@ -19,7 +19,7 @@ urlpatterns = [
 ]
 
 def startup():
-    threading.Timer(200.0, startup).start()
+    threading.Timer(1200.0, startup).start()
     print("Fetching news..." , time.ctime(time.time()))
     os.system('python3 latest_news/fetch_news.py')
 
