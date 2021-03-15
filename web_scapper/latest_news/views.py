@@ -53,7 +53,6 @@ def get_weather():
     return weather_report
 
 def index(request):
-    os.system('python3 latest_news/fetch_news.py')
 
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
     mydb = myclient["web_scraper"]
