@@ -50,6 +50,13 @@
         color: #EB7D46;
         text-decoration: none;
     }
+    .report-btn{
+        border: 0ex;
+    }
+    .report-btn:hover{
+        color: white;
+        background-color: #EB7D46;
+    }
 </style>
 {% endblock styles %}
 
@@ -117,7 +124,14 @@ Description : {{news.Content}}<br>
                 <a class="card-link">Source : {{news.Source}}</a>
             </div>
             <div class="card-footer text-muted border-dark">
-                {{news.DateTime}} minutes ago
+                <p style="display: inline-block;">{{news.DateTime}} minutes ago</p>&nbsp;&nbsp;
+                <div style="float: right;">
+                    <form method="POST" action="/report">
+                        {% csrf_token %}
+                        <input type="hidden" id="newsid" name="newsid" value="{{ news.id }}"/>
+                        <button title="Report" class="report-btn" type="submit" ><i class="fa fa-flag" style="float: right;font-size: 1.5em;" aria-hidden="true"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
 
