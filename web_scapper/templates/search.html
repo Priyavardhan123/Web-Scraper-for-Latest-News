@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    body{
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>
+{% endblock styles %}
+
+
+{% block title %}SearchResults - NewsHunter
+{% endblock title %}
+
+{% block body %}
+
+    <!-- For no search results -->
+    {% if nl_len is 0 %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">No Search Results</h1>
+            <p class="lead">Try different keyword.</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Content -->
+    <div class="container my-3">
+        {% for i in news %}
+        <div class="card my-3">
+            <div class="row">
+              <div class="col-3">
+                <a href="{{i.Article_link}}">
+                  <img class="card-img-top m-auto" src="{{i.Img_src}}" style="border-color: black; border-radius: 5px; width: 100%; max-width:300px;" alt="news image">
+                </a>
+              </div>
+              <div class="col-9">
+                <div class="card-body mx-3 my-3">
+                  <a style="color: black" class="headline_links" href="{{i.Article_link}}"><h4 class="card-title headline_links">{{i.Headline}}</h4></a><hr>
+                  <p class="card-text">{{i.Content}}</p>
+                  <a class="card-link" style="display: inline-block;">Source : {{i.Source}}</a>
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- Content End -->
+
+{% endblock body %}
