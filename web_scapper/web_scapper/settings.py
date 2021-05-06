@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'latest_news.apps.LatestNewsConfig',
+    'webpush',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BEPTZsQaGx-609HZacimV7QS4kBYnzXKfzkXzPrVYktzN2AIYPmEyGeo3TSINc9w-guOSNWT-g624PlvzejxXS0",
+    "VAPID_PRIVATE_KEY":"MMbyrb8pCltR1_kObdsrAyJtwdzH7qx6lYtFp5FGgl8",
+    "VAPID_ADMIN_EMAIL": "mauneelahir.1@gmail.com"
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
