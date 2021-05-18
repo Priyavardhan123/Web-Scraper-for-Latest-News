@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {% load static %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png" sizes="16x16">
+    
+    <style>
+      #navbar_head{
+        font-size: 1.2rem;
+      }
+      .fa-search{
+        color: white;
+      }
+      .fa-search:hover{
+        color: #EB7D46;
+      }
+      .sinput:focus{
+        border-color: #EB7D46;
+        border-width: 0.4ex;
+      }
+      .dropdown-item:active{
+          background-color: #EB7D46;
+          color: white;
+      }
+      .dropdown-item:hover{
+          background-color: #EB7D46;
+          color: white;
+      }
+    </style>
+
+    <title> {% block title %}
+    {% endblock title %} </title> 
+
+    {% block styles %}
+    {% endblock styles %}
+    
+  </head>
+  <body style="font-family: 'Montserrat', sans-serif;">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar_head">
+        <a class="navbar-brand" href="/home"><img src="{% static 'images/logo.png' %}" style="width: 114px; height:72px;"/></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">   
+            <li class="nav-item">
+              <a class="nav-link" id="latest_news" href="/home">Latest News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="sports_news" href="/sports">Sports</a>
+            </li> 
+              <li class="nav-item">
+              <a class="nav-link" id="business_news" href="/business">Business</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tech_news" href="/tech">Tech</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="entertainment_news" href="/entertainment">Entertainment</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="politics_news" href="/politics">Politics</a>
+            </li>
+          </ul>
+          
+          <ul class="navbar-nav ml-auto float-right">
+            <form class="form-inline my-2 mx-2 my-lg-0" method="POST" action="/search">
+              {% csrf_token %}
+              <input class="sinput form-control mr-sm-2" type="search" name="squery" placeholder="Search News" aria-label="Search">
+              <button type="submit" style="border: 0ex;" class="btn bg-dark sbtn"><i class="fa fa-search" style="font-size: 1.5em;" aria-hidden="true"></i></button>
+            </form>&nbsp;&nbsp;
+            <li>
+              <div class="dropdown">
+                <button class="btn btn-secondary bg-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  More
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="/shownews/6">News of past 6hrs</a>
+                  <a class="dropdown-item" href="/shownews/12">News of past 12hrs</a>
+                  <a class="dropdown-item" href="/push_noti">Push Notifications</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item nav-link active" style="font-size: 15px; margin-top: -5%; margin-bottom: -5%; margin-left: 6px;">
+              <i style="font-size:20px" class="fa">&#xf041;</i> {{weather_report.city}} <br>
+              Feels Like {{weather_report.temp}} &#8451<br>
+              With {{weather_report.weather}} <img src="http://openweathermap.org/img/w/{{weather_report.icon}}.png" style="margin-top: -10%" alt="weather_img">
+            </li>
+            
+          </ul>
+        </div>
+      </nav>
+    <div class="container my-3">
+      {% block body %}
+      {% endblock body %}
+    </div>
+
+    <footer class="footer">
+      <div class="d-flex justify-content-center" style="background: #343A40">
+        <span class="my-2 nav-link" style="color: white; text-align: center">News Hunter<br> Copyright &copy; 2021 </span>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
